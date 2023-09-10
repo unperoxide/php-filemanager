@@ -371,6 +371,54 @@ defined('FM_UPLOAD_EXTENSION') || define('FM_UPLOAD_EXTENSION', $allowed_upload_
 defined('FM_DOC_VIEWER') || define('FM_DOC_VIEWER', $online_viewer);
 define('FM_READONLY', $use_auth && !empty($readonly_users) && isset($_SESSION[FM_SESSION_ID]['logged']) && in_array($_SESSION[FM_SESSION_ID]['logged'], $readonly_users));
 define('FM_IS_WIN', DIRECTORY_SEPARATOR == '\\');
+
+// printf("\n\n<pre>%s</pre>\n\n\n", print_r($_SESSION[FM_SESSION_ID]['logged'], true));
+
+if ($_SESSION[FM_SESSION_ID]['logged'] === 'consigliere') {
+    $exclude_items = [
+        '_',
+        '001',
+        'modules',
+        '_archive',
+        'app',
+        'android',
+        '_startapp',
+        'admin',
+        'web',
+        'static',
+        'yodo',
+        'americal-psycho-ooh.webp',
+        'index.html',
+        'backups',
+        'activity',
+        'core',
+        'config',
+        'lib',
+        'logs',
+        'security',
+        'vendor',
+        'K6pYQaLdvKowCDZjhF',
+        'job-iZk7tK8Itf',
+        'n6W9JzJhkQORzUdwWF',
+        'default',
+        'error-page',
+        'senator',
+        'job',
+        'view-task',
+        '.htaccess',
+        'robots.txt',
+        'favicon.png',
+        'favicon.ico',
+        'cloudflare.php',
+        'constants.php',
+        '_constants.php',
+        'dev-iZk7tK8Itf',
+        'dev-Zd9XuIp3lJ',
+        'composer.json',
+        'composer.lock',
+    ];
+}
+
 defined('FM_EXCLUDE_ITEMS') || define('FM_EXCLUDE_ITEMS', (version_compare(PHP_VERSION, '7.0.0', '<') ? serialize($exclude_items) : $exclude_items));
 
 // always use ?p=
@@ -3486,8 +3534,10 @@ global $lang, $root_url, $favicon_path;
     <meta name="googlebot" content="noindex">
     <?php if($favicon_path) { echo '<link rel="icon" href="'.fm_enc($favicon_path).'" type="image/png">'; } ?>
     <title><?php echo fm_enc(APP_TITLE) ?></title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://static.hypr.pw/css/inter.css" />
     <style>
         html, body {
             overscroll-behavior-x: none;
@@ -3496,6 +3546,7 @@ global $lang, $root_url, $favicon_path;
             font-size:16px;
             color:#222;
             background:#F7F7F7;
+            font-family: 'Roboto', sans-serif;
         }
         html, body {
             overscroll-behavior-x: none;
@@ -3570,9 +3621,11 @@ $isStickyNavBar = $sticky_navbar ? 'navbar-fixed' : 'navbar-normal';
     <?php if($favicon_path) { echo '<link rel="icon" href="'.fm_enc($favicon_path).'" type="image/png">'; } ?>
     <title><?php echo fm_enc(APP_TITLE) ?></title>
     
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@300;400&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="https://static.hypr.pw/css/inter.css">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Material+Symbols+Rounded:opsz,wght,FILL,GRAD@20..48,100..700,0..1,-50..200" />
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ekko-lightbox/5.3.0/ekko-lightbox.css" />
     
@@ -3601,6 +3654,7 @@ $isStickyNavBar = $sticky_navbar ? 'navbar-fixed' : 'navbar-normal';
             font-size:16px;
             color:#222;
             background:#F7F7F7;
+            font-family: 'Roboto', sans-serif;
         }
         
         body.navbar-fixed { margin-top: 90px; }
